@@ -125,8 +125,9 @@ const RealEstateAccountLayout = ({ accountPageTitle, children }) => {
   const error = errorRole || errorUser;
 
   //console.log("User Identity", user_identity);
-  const avatarSrc = session?.user?.avatar || '/images/avatars/45.jpg';
-
+  const avatarSrc = session?.user?.avatar
+    ? 'https://immoaskbetaapi.omnisoft.africa/public/storage/uploads/visuels/avatars/' + session.user.avatar
+    : '/images/avatars/45.jpg';
 
   return (
     <Container fluid className='pt-5 pb-lg-4 mt-5 mb-sm-2'>
@@ -137,7 +138,7 @@ const RealEstateAccountLayout = ({ accountPageTitle, children }) => {
           <div className='card card-body border-0 shadow-sm pb-1 me-lg-1'>
             <div className='d-flex d-md-block d-lg-flex align-items-start pt-lg-2 mb-4'>
 
-              {session && (<Avatar img={{ src: 'https://immoaskbetaapi.omnisoft.africa/public/storage/uploads/visuels/avatars/' + avatarSrc, alt: 'Avatar' }} size={[48, 48]} />)}
+              {session && (<Avatar img={{ src: avatarSrc, alt: 'Avatar' }} size={[48, 48]} />)}
               <div className='pt-md-2 pt-lg-0 ps-3 ps-md-0 ps-lg-3'>
                 <h2 className='fs-lg mb-0'>{session?.user?.name || " "}</h2>
                 <MediumRealEstateAgencyCard user={session ? session.user?.id : "1"} />

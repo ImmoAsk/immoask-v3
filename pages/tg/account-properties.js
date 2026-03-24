@@ -402,9 +402,9 @@ export async function getServerSideProps(context) {
     var handlingProjets = await fetch(`${API_URL}?query={getPropertiesByKeyWords(orderBy:{order:DESC,column:NUO},statut:2,limit:50){surface,badge_propriete{badge{badge_name,badge_image}},id,nuo,usage,offre{denomination},categorie_propriete{denomination},pays{code},piece,titre,garage,cout_mensuel,nuitee,ville{denomination},wc_douche_interne,cout_vente,quartier{denomination,id,minus_denomination},visuels{uri,position}}}`);
     var _handlingProjets = await handlingProjets.json();
 
-    _userProperties = _userProperties.data.getPropertiesByKeyWords;
-    _handledProjets = _handledProjets.data.getPropertiesByKeyWords;
-    _handlingProjets = _handlingProjets.data.getPropertiesByKeyWords;
+    _userProperties = _userProperties.data?.getPropertiesByKeyWords || [];
+    _handledProjets = _handledProjets.data?.getPropertiesByKeyWords || [];
+    _handlingProjets = _handlingProjets.data?.getPropertiesByKeyWords || [];
   } else {
     // Property owner
     var dataAPIresponse = await fetch(`${API_URL}?query={getPropertiesByKeyWords(orderBy:{order:DESC,column:NUO},user_id:${Number(session?.user?.id)},offre_id:"1",statut:1,limit:50){surface,badge_propriete{badge{badge_name,badge_image}},id,nuo,usage,offre{denomination},categorie_propriete{denomination},pays{code},piece,titre,garage,nuitee,cout_mensuel,ville{denomination},wc_douche_interne,cout_vente,quartier{id,denomination,minus_denomination},visuels{uri,position}}}`);
@@ -416,10 +416,10 @@ export async function getServerSideProps(context) {
     var handlingProjets = await fetch(`${API_URL}?query={getPropertiesByKeyWords(orderBy:{order:DESC,column:NUO},user_id:${Number(session?.user?.id)},statut:2,limit:50){surface,badge_propriete{badge{badge_name,badge_image}},id,nuo,usage,offre{denomination},categorie_propriete{denomination},pays{code},piece,titre,garage,cout_mensuel,nuitee,ville{denomination},wc_douche_interne,cout_vente,quartier{denomination,id,minus_denomination},visuels{uri,position}}}`);
     var _handlingProjets = await handlingProjets.json();
 
-    _userProperties = _userProperties.data.getPropertiesByKeyWords;
 
-    _handledProjets = _handledProjets.data.getPropertiesByKeyWords;
-    _handlingProjets = _handlingProjets.data.getPropertiesByKeyWords;
+    _userProperties = _userProperties.data?.getPropertiesByKeyWords || [];
+    _handledProjets = _handledProjets.data?.getPropertiesByKeyWords || [];
+    _handlingProjets = _handlingProjets.data?.getPropertiesByKeyWords || [];
 
   }
   //console.log(_userProperties);

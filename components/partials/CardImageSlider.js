@@ -9,6 +9,8 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 
 const CardImageSlider = ({ horizontal, images, href, badges, wishlistButton, light }) => {
+  // Sécuriser images pour éviter l'erreur .map is not a function
+  const safeImages = Array.isArray(images) ? images : images ? [images] : [];
 
   return (
     <Swiper
@@ -17,7 +19,7 @@ const CardImageSlider = ({ horizontal, images, href, badges, wishlistButton, lig
       loop
       className='card-img-top card-img-hover'
     >
-      {images.map((image, indx) => {
+      {safeImages.map((image, indx) => {
         return <SwiperSlide key={indx} className='d-flex'>
           {horizontal ? <ImageLoader
             src={image[0]}
